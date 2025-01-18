@@ -1,43 +1,118 @@
-# Witchcraft: Automagically Dubbing Videos with AI
+# Witchcraft - AI-Powered Video Dubbing Tool
 
-Witchcraft is a local AI-based tool that automagically dubs videos into different languages. This project utilizes several others open source projects to make the process of extract audio, isolate voices, transcribe, translate, and generate audio, ensuring seamless synchronization with the original video while preserving background music.
-The goal of this project is to empower users to perform the dubbing process on their own machines, eliminating the need to pay for various AI tools. By providing an accessible and free solution, Witchcraft aims to enhance the reach of knowledge through the translation of educational content and beyond.
+**Witchcraft** is an open-source command-line tool that automates the process of dubbing videos into another language. Its primary goal is to make educational content and online videos more accessible to people around the world by enabling them to consume content in their native language.
 
-# Steps to Automagically Dub Videos with AI
+While we aim to incorporate as much open-source technology as possible, this tool leverages powerful APIs from industry leaders like OpenAI and Google to ensure high-quality results. Open-source components are included wherever feasible.
 
-1. **Isolate Voice from Background Sound**  
-   Use an audio separation tool to isolate the voice from the background sound, resulting in two separate files: `vocals.wav` and `accompaniment.wav`.
+## Features
 
-   **Tools:** [Spleeter](https://github.com/deezer/spleeter), [Demucs](https://github.com/facebookresearch/demucs)
+- **YouTube Video Input**: Simply provide the URL of a YouTube video.
+- **Automatic Transcription**: Extract the speech from the video and generate a timestamped transcription.
+- **Translation**: Translate the transcription into the target language.
+- **Text-to-Speech (TTS)**: Generate audio from the translated transcription.
+- **Synchronization**: Ensure the new audio aligns perfectly with the original video.
+- **Seamless Output**: Replace the original audio track in the video with the newly generated dubbed audio.
 
-2. **Transcription**  
-   Transcribe the isolated voice (`vocals.wav`) into text (`transcription.txt`) using a transcription tool.
+## How It Works
 
-   **Tools:** [Vosk](https://github.com/alphacep/vosk), [Whisper](https://github.com/openai/whisper)
+### Steps to Automagically Dub Videos with AI
 
-3. **Translate the Transcription**  
-   Translate the transcribed text into the target language (`translated_transcription.txt`).
+1. **Transcription with Timestamps**
+   - Extract speech from the video and generate a timestamped transcription.
+   - **API Used**: OpenAI Whisper
 
-   **Tools:** [Helsinki-NLP/Opus-MT](https://github.com/Helsinki-NLP/Opus-MT), [Argos Translate](https://github.com/argosopentech/argos-translate)
+2. **Translate the Transcription**
+   - Translate the transcribed text into the target language.
+   - **API Used**: Google Translate API, DeepL API
 
-4. **Text-to-Speech (TTS)**  
-   Generate new audio from the translated transcription using TTS (`translated_audio.wav` or `translated_audio.mp3`).
+3. **Text-to-Speech (TTS)**
+   - Generate new audio from the translated transcription.
+   - **API Used**: Google Cloud TTS, Amazon Polly
 
-   **Tools:** [Coqui TTS](https://github.com/coqui-ai/TTS), [Mozilla TTS](https://github.com/mozilla/TTS)
+4. **Synchronize the Voice with the Video**
+   - Align the newly generated audio with the video’s original timings to ensure proper synchronization.
+   - **Tools**: FFmpeg for timing alignment and adjustments
 
-5. **Synchronize the Voice with the Video**  
-   Align the newly generated audio with the correct timings in the video, ensuring proper synchronization (`synced_audio.wav` or `synced_audio.mp3`).
+5. **Replace Original Audio with Generated Audio**
+   - Replace the original video’s audio with the newly generated and synchronized dubbed audio, keeping the video content intact.
+   - **Tools**: FFmpeg
 
-   **Tools:** [Aeneas](https://github.com/readbeyond/aeneas)
+## Installation
 
-6. **Combine New Voice with Background Sound**  
-   Mix the synchronized voice with the original background sound to create a single audio file (`final_audio.wav` or `final_audio.mp3`).
+### Prerequisites
 
-   **Tools:** [FFmpeg](https://ffmpeg.org/)
+- **Node.js** (v16 or later)
+- **FFmpeg** (Ensure it’s installed and added to your system PATH)
+- API keys for the services you plan to use (e.g., OpenAI, Google Cloud)
 
-7. **Replace Original Audio with Generated Audio**  
-   Replace the original audio in the video with the newly generated and mixed audio, keeping the video content intact (`final_video.mp4`).
+### Clone the Repository
+```bash
+$ git clone https://github.com/marcoshmendes/witchcraft.git
+$ cd witchcraft
+```
 
-   **Tools:** [FFmpeg](https://ffmpeg.org/)
+### Install Dependencies
+```bash
+$ npm install
+```
 
+### Set Up Environment Variables
+Create a `.env` file in the project root and add your API keys:
+```env
+OPENAI_API_KEY=your_openai_api_key
+GOOGLE_CLOUD_API_KEY=your_google_cloud_api_key
+DEEPL_API_KEY=your_deepl_api_key
+```
+
+## Usage
+
+### Basic Command
+Run the following command, providing the URL of the YouTube video you want to dub:
+```bash
+$ node index.js --url <youtube_video_url> --language <target_language_code>
+```
+- `--url`: The YouTube video URL.
+- `--language`: The target language code (e.g., `en` for English, `es` for Spanish).
+
+### Example
+```bash
+$ node index.js --url https://www.youtube.com/watch?v=dQw4w9WgXcQ --language es
+```
+This will process the video, translate it into Spanish, and output the dubbed video with synchronized audio.
+
+### Output
+The output will be a video file with the new dubbed audio track:
+```
+output/final_video.mp4
+```
+
+## Contributing
+
+Contributions are welcome! Feel free to open issues, submit pull requests, or suggest new features. For major changes, please open an issue first to discuss what you’d like to change.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a pull request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Roadmap
+
+- Support for additional video platforms (e.g., Vimeo, Dailymotion)
+- Improve synchronization with machine learning models
+- Add support for more languages and accents in TTS
+- Enhance error handling and user feedback
+
+## Acknowledgments
+
+- **OpenAI Whisper** for transcription.
+- **Google Cloud** and **DeepL** for translation services.
+- **Google Cloud TTS** and **Amazon Polly** for TTS.
+- **FFmpeg** for video and audio processing.
+
+We hope Witchcraft becomes a valuable tool for educators, creators, and anyone looking to break language barriers!
 
