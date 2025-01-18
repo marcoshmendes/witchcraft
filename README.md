@@ -13,37 +13,29 @@ While we aim to incorporate as much open-source technology as possible, this too
 - **Synchronization**: Ensure the new audio aligns perfectly with the original video.
 - **Seamless Output**: Replace the original audio track in the video with the newly generated dubbed audio.
 
-Steps to Automagically Dub Videos with AI
+## How It Works
 
-Transcription with Timestamps
+### Steps to Automagically Dub Videos with AI
 
-Extract speech from the video and generate a timestamped transcription.
+1. **Transcription with Timestamps**
+   - Extract speech from the video and generate a timestamped transcription.
+   - **API Used**: OpenAI Whisper
 
-API Used: OpenAI Whisper
+2. **Translate the Transcription**
+   - Translate the transcribed text into the target language.
+   - **API Used**: OpenAI GPT models for high-quality translation
 
-Translate the Transcription
+3. **Text-to-Speech (TTS)**
+   - Generate new audio from the translated transcription.
+   - **API Used**: OpenAI TTS (or other advanced TTS APIs for specific languages)
 
-Translate the transcribed text into the target language.
+4. **Synchronize the Voice with the Video**
+   - Align the newly generated audio with the video’s original timings to ensure proper synchronization.
+   - **Tools**: FFmpeg for timing alignment and adjustments
 
-API Used: OpenAI GPT models for high-quality translation
-
-Text-to-Speech (TTS)
-
-Generate new audio from the translated transcription.
-
-API Used: OpenAI TTS (or other advanced TTS APIs for specific languages)
-
-Synchronize the Voice with the Video
-
-Align the newly generated audio with the video’s original timings to ensure proper synchronization.
-
-Tools: FFmpeg for timing alignment and adjustments
-
-Replace Original Audio with Generated Audio
-
-Replace the original video’s audio with the newly generated and synchronized dubbed audio, keeping the video content intact.
-
-Tools: FFmpeg
+5. **Replace Original Audio with Generated Audio**
+   - Replace the original video’s audio with the newly generated and synchronized dubbed audio, keeping the video content intact.
+   - **Tools**: FFmpeg
 
 ## Installation
 
@@ -51,7 +43,7 @@ Tools: FFmpeg
 
 - **Node.js** (v16 or later)
 - **FFmpeg** (Ensure it’s installed and added to your system PATH)
-- API keys for the services you plan to use (e.g., OpenAI, Google Cloud)
+- API keys for the services you plan to use (e.g., OpenAI)
 
 ### Clone the Repository
 ```bash
@@ -68,8 +60,6 @@ $ npm install
 Create a `.env` file in the project root and add your API keys:
 ```env
 OPENAI_API_KEY=your_openai_api_key
-GOOGLE_CLOUD_API_KEY=your_google_cloud_api_key
-DEEPL_API_KEY=your_deepl_api_key
 ```
 
 ## Usage
@@ -118,8 +108,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 - **OpenAI Whisper** for transcription.
-- **Google Cloud** and **DeepL** for translation services.
-- **Google Cloud TTS** and **Amazon Polly** for TTS.
+- **OpenAI GPT** for translation services.
+- **OpenAI TTS** for text-to-speech.
 - **FFmpeg** for video and audio processing.
 
 We hope Witchcraft becomes a valuable tool for educators, creators, and anyone looking to break language barriers!
