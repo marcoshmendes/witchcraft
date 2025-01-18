@@ -43,7 +43,29 @@ While we aim to incorporate as much open-source technology as possible, this too
 
 - **Node.js** (v16 or later) 🖥️
 - **FFmpeg** (Ensure it’s installed and added to your system PATH) 🛠️
-- API keys for the services you plan to use (e.g., OpenAI) 🔑
+### yt-dlp
+- Necessary for downloading videos from provided URLs.
+- Install the yt-dlp library:
+  - **Windows:**
+    ```bash
+    pip install -U yt-dlp
+    ```
+  - **WSL (Linux):**
+    ```bash
+    sudo apt update
+    sudo apt install python3-pip
+    pip3 install -U yt-dlp
+    ```
+### Precompiled Binary yt-dlp
+
+Download the binary directly, no Python installation required:  
+[yt-dlp Binary Download Link](https://github.com/yt-dlp/yt-dlp/releases/latest)
+
+Add the binary to your PATH for easier usage:  
+```bash
+mv yt-dlp /usr/local/bin/
+chmod +x /usr/local/bin/yt-dlp
+- API keys for the services from OpenAI 🔑
 
 ### Clone the Repository
 ```bash
@@ -74,7 +96,7 @@ $ node index.js --url <youtube_video_url> --language <target_language_code>
 
 ### Example
 ```bash
-$ node index.js --url https://www.youtube.com/watch?v=dQw4w9WgXcQ --language es
+$ node index.js --url https://www.youtube.com/watch?v=q15yNrJHOak --language es
 ```
 This will process the video, translate it into Spanish, and output the dubbed video with synchronized audio. 🎉
 

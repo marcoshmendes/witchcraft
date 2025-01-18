@@ -1,0 +1,39 @@
+{
+  "name": "witchcraft",
+  "version": "1.0.0",
+  "description": "**Witchcraft** is an open-source command-line tool that automates the process of dubbing videos into another language. Its primary goal is to expand knowledge by breaking down language barriers, enabling people around the world to access and understand educational content and online videos in their native language. 🌟",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "video",
+    "dubbing",
+    "translation",
+    "openai",
+    "tts",
+    "education",
+    "accessibility"
+  ],
+  "author": "Marcos Mendes",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "openai": "^4.79.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.48.0",
+    "prettier": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marcoshmendes/witchcraft.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marcoshmendes/witchcraft/issues"
+  },
+  "homepage": "https://github.com/marcoshmendes/witchcraft#readme"
+}
